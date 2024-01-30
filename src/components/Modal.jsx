@@ -7,7 +7,7 @@ const Modal = forwardRef(function Modal({ children, buttonText }, ref) {
 
   useImperativeHandle(ref, () => {
     return {
-      error() {
+      open() {
         dialog.current.showModal();
       },
     };

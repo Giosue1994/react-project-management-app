@@ -1,4 +1,4 @@
-import { useState, useRef, forwardRef } from "react";
+import { useRef } from "react";
 import Input from "./Input.jsx";
 import Button from "./Button.jsx";
 import Modal from "./Modal.jsx";
@@ -35,7 +35,7 @@ export default function NewProject({ onAddProject, onCancelProject }) {
       newDate.trim() === "";
 
     if (inputNotValid) {
-      dialog.current.error();
+      dialog.current.open();
       return;
     }
 
@@ -58,16 +58,16 @@ export default function NewProject({ onAddProject, onCancelProject }) {
         <p className="text-stone-600 mb-4">Per favore controlla e riprova</p>
       </Modal>
 
-      <div className="w-2/3 pt-12 pr-12">
+      <div className="w-[35rem] mt-16">
         <div>
           <menu className="flex justify-end">
             <button
               onClick={onCancelProject}
               className="hover:bg-red-700 px-8 py-2 hover:text-white text-stone-700 rounded-md"
             >
-              Cancel
+              Cancella
             </button>
-            <Button onClick={handleSave}>Save</Button>
+            <Button onClick={handleSave}>Salva</Button>
           </menu>
 
           <div>
