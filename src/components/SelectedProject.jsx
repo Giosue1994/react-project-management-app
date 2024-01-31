@@ -1,3 +1,5 @@
+import Tasks from "./Tasks";
+
 export default function SelectedProject({ project, onDeleteProject }) {
   const formattedDate = new Date(project.date).toLocaleDateString("it-IT", {
     year: "numeric",
@@ -25,21 +27,7 @@ export default function SelectedProject({ project, onDeleteProject }) {
         </p>
       </header>
 
-      <div>
-        <h2 className="text-2xl font-bold text-stone-700 mb-4">Tasks</h2>
-        <p className="text-stone-800 my-4">
-          <input type="text" />
-          <button>Aggiungi Task</button>
-        </p>
-        <ul className="p-4 mt-8 rounded-md bg-stone-100">
-          <li className="flex justify-between my-4">
-            <p></p>
-            <button className="text-stone-700 hover:text-red-500">
-              Cancella
-            </button>
-          </li>
-        </ul>
-      </div>
+      <Tasks />
     </div>
   );
 }
