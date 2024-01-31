@@ -71,9 +71,9 @@ export default function NewProject({ onAddProject, onCancelProject }) {
           </menu>
 
           <div>
-            <Input ref={newProjectTitle} type="text" label="Title" />
-            <Input ref={newProjectDescription} textarea label="Description" />
-            <Input ref={newProjectDate} type="date" label="Due date" />
+            <Input ref={newProjectTitle} type="text" label="Titolo" />
+            <Input ref={newProjectDescription} textarea label="Descrizione" />
+            <Input ref={newProjectDate} type="date" label="Scadenza" />
           </div>
         </div>
       </div>

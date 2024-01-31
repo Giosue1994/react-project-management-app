@@ -1,42 +1,34 @@
 import { useRef, useState } from "react";
+import Modal from "./Modal";
 
-export default function Tasks() {
-    const taskInput = useRef();
-    const [tasks, setNewTasks] = useState([]);
+export default function Tasks({onAdd, onCancel, tasks}) {
+    const dialog = useRef();
+    const [enteredTask, setEnteredTask] = useState('');
 
-    function handleAddTask() {
-        const taskId = Math.random();
-
-        setNewTasks((prevTasks) => {
-            return [
-              ...prevTasks,
-              {
-                id: taskId,
-                title: taskInput.current.value,
-              },
-            ];
-        });
+    function handleChange(event) {
+      setEnteredTask(event.target.value);
     }
+    function handleClick() {
+      const inputNotValid = enteredTask.trim() === "";
 
-    function handleCancelTask() {
-      setNewTasks((prevTasks) => {
-        // prevTasks.filter((task) => task.id !== task.id);
-        return {
-          prevTasks: [...prevTasks.filter((task) => task.id !== task.id)],
-        };
-      });
+      if (inputNotValid) {
+        dialog.current.open();
+        return;
+      }
+
+      onAdd(enteredTask);
+      setEnteredTask("");
     }
-
-    console.log(tasks);
+    console.log(tasks)
 
     let tasksContent = (
       <ul className="p-4 mt-8 rounded-md bg-stone-100">
           {tasks.map((task) => {
             return (
               <li key={task.id} className="flex justify-between my-4">
-                <p>{task.title}</p>
+                <p>{task.text}</p>
                 <button
-                  onClick={handleCancelTask}
+                  onClick={() => onCancel(task.id)}
                   className="text-stone-700 hover:text-red-500"
                 >
                   Cancella
@@ -57,16 +49,26 @@ export default function Tasks() {
         <div className="flex items-center gap-4">
           <input
             className="w-64 px-2 py-1 rounded-sm bg-stone-200"
-            ref={taskInput}
+            onChange={handleChange}
+            value={enteredTask}
             type="text"
           />
           <button
             className="text-stone-700 hover:text-stone-950"
-            onClick={handleAddTask}
+            onClick={handleClick}
           >
             Aggiungi Task
           </button>
         </div>
+
+        <Modal ref={dialog} buttonText="Okay">
+          <h2 className="text-xl font-bold text-stone-700 my-4">
+            Input non valido
+          </h2>
+          <p className="text-stone-600 mb-4">
+            Il campo non può essere vuoto.
+          </p>
+        </Modal>
 
         {tasksContent}
       </div>
