@@ -19,7 +19,6 @@ export default function Tasks({onAdd, onCancel, tasks}) {
       onAdd(enteredTask);
       setEnteredTask("");
     }
-    console.log(tasks)
 
     let tasksContent = (
       <ul className="p-4 mt-8 rounded-md bg-stone-100">
